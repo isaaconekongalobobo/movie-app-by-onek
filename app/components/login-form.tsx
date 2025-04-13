@@ -6,14 +6,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { SignInButton, SignUp, useUser } from "@clerk/nextjs"
-import { useRouter } from "next/router"
 import { redirect } from 'next/navigation'
+import { useForm } from "react-hook-form"
+import Link from "next/link"
 
+interface formType {
+  email: string,
+  password: string
+}
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
-    const { isSignedIn } = useUser()
-    if (isSignedIn) {
-        redirect('/home')
-    }
+  const { isSignedIn } = useUser()
+  if (isSignedIn) {
+    redirect('/home')
+  }
+  const { handleSubmit, register } = useForm<formType>()
+  const OnFormSubmit = (data: formType) => {
+    const { email, password } = data
+    alert (email)
+  }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -24,7 +34,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit(OnFormSubmit)}>
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
                 {/* Bouton de connexion avec clerk */}
@@ -45,7 +55,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
               <div className="grid gap-6">
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="m@example.com" required/>
+                  <Input {...register("email")} id="email" type="email" placeholder="m@example.com" required/>
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
@@ -54,15 +64,15 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                       Mot de passe oublié ?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input {...register("password")} id="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full">Se connecter </Button>
               </div>
               <div className="text-center text-sm">
                 Vous n'avez pas de compte ?
-                <a href="#" className="underline underline-offset-4">
+                <Link href="/SignIn" className="underline underline-offset-4">
                   Créer un compte
-                </a>
+                </Link>
               </div>
             </div>
           </form>
