@@ -23,7 +23,7 @@ const Header = () => {
             <h1 className='sm:text-xl font-semibold text-[#FF0800] '>Movie App <mark className='bg-white text-[#FF0800] sm:px-4 px-1 py-1 font-bold sm:text-2xl rounded '>by Onek</mark></h1>
             <nav className=" hidden sm:flex flex-row justify-center gap-16 w-2/4  ">
                 {
-                    ongletList.map ((onglet, key) => <Onglet href={onglet.href} text={onglet.text}/> )
+                    ongletList.map ((onglet, key) => <Onglet key={key} href={onglet.href} text={onglet.text}/> )
                 }  
             </nav>  
             <div className='flex flex-row justify-center gap-2 items-center cursor-pointer' title='Votre profile' onClick={() => setShowProfileContainer (true)}>

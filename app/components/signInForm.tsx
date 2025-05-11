@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,6 +9,10 @@ import { Label } from "@/components/ui/label"
 import { redirect } from 'next/navigation'
 import { useForm } from "react-hook-form"
 import Link from 'next/link';
+import axios from 'axios';
+import { Resend } from 'resend';
+
+const resend = new Resend("re_W2X97ssQ_25xZ8JMuq4J1jEKEGCLX712L");
 
 interface formType {
     firstName: string,
@@ -19,10 +23,21 @@ interface formType {
 
 const SignInForm = () => {
     const { handleSubmit, register } = useForm<formType>()
-    const OnFormSubmit = (data: formType) => {
+    const OnFormSubmit = async (data: formType) => {
+      useEffect(() => {
         const { firstName, lastName, email, password } = data
-        alert (firstName + lastName)
-      }
+        try {
+          resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: email,
+            subject: 'Code de vrification',
+            html: '<p>VOici votre code de validation: 289392 </strong>!</p>'
+          })
+          } catch (error) {
+            console.log(error);
+        }
+      }, []);
+    }
     return (
         <div className={cn("flex flex-col gap-6")}>
         <Card>
