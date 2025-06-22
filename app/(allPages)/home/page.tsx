@@ -17,7 +17,6 @@ const Page = () => {
     const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
-        console.log('\n ICI, Clé', apiKey)
         setLoading (false)
         axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=fr-FR`)
         .then((response) => {
@@ -28,11 +27,13 @@ const Page = () => {
     }, []);
     return (
         <main>
-            <div style={{ backgroundImage: `url('/images/avatar-cover.jpg')` }} className='bg-cover bg-center w-[100%] h-screen sm:px-8 sm:py-10'>
-                <div className="relative p-6 top-[45%] ">
-                    <div className='flex flex-col gap-2'>
-                        <h1 className='text-5xl font-semibold'>Votre plaisir commence par ici...</h1>
-                        <p className="text-white mt-2 text-2xl sm:relative left-2">Découvrez les meilleurs films du moment</p>                        
+            <div style={{ backgroundImage: `url('/images/avatar-cover.jpg')` }} className='bg-left bg-no-repeat w-[100%] h-screen sm:px-8 sm:py-10'>
+                <div className="relative p-6 top-[40%] ">
+                    <div className='flex flex-col gap-5'>
+                        <h1 className='text-6xl font-bold w-2/4'>Votre plaisir 
+                        <mark className='px-3 mx-3 bg-black text-[#FF0800] rounded-tl-4xl rounded-br-4xl'>commence</mark> par ici...
+                        </h1>
+                        <p className="text-white mt-2 text-2xl sm:relative left-2 top-10">Découvrez les meilleurs films du moment</p>                        
                     </div>
                 </div>
             </div>
@@ -40,6 +41,7 @@ const Page = () => {
                 { loading ? <h1 className="text-white text-xl">Chargement des films...</h1> : (
                     movies.map((movie, key) => (
                         <MovieCard
+                        id={movie.id}
                         key={key}
                         img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         title={movie.title}

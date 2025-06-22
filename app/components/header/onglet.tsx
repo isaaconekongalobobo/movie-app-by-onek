@@ -14,7 +14,7 @@ const Onglet = ({href, text}: OngletType) => {
     const isActive = pathname == href
     return (
         <Link href={href}>
-            <span className={` ${ isActive && 'text-[#FF0800] '} `}> {text} </span>
+            <span className={`cursor-pointer ${ isActive && 'text-[#FF0800] '}`}> {text} </span>
         </Link>
     );
 }
