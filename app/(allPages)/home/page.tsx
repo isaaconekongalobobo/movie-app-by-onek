@@ -27,12 +27,19 @@ const Page = () => {
     }, []);
     return (
         <main>
-            <div style={{ backgroundImage: `url('/images/avatar-cover.jpg')` }} className='bg-left bg-no-repeat w-[100%] h-screen sm:px-8 sm:py-10'>
-                <div className="relative p-6 top-[40%] ">
-                    <div className='flex flex-col gap-5'>
-                        <h1 className='text-6xl font-bold w-2/4'>Votre plaisir 
+            <div style={{ backgroundImage: `url('/images/avatar-cover.jpg')` }} className='bg-center sm:bg-left bg-no-repeat w-[100%] h-screen sm:px-8 sm:py-10'>
+                <div className='bg-black h-screen opacity-20 rounded-2xl '/>
+                <div className="relative p-6 top-[-60%] z-10 ">
+                    <div className=' hidden sm:flex flex-col gap-5'>
+                        <h1 className='text-6xl font-bold sm:w-2/4'>Votre plaisir 
                         <mark className='px-3 mx-3 bg-black text-[#FF0800] rounded-tl-4xl rounded-br-4xl'>commence</mark> par ici...
                         </h1>
+                        <p className="text-white mt-2 text-2xl sm:relative left-2 ">Découvrez les meilleurs films du moment</p>                        
+                    </div>
+                    <div className='flex sm:hidden flex-col gap-5'>
+                        <span className='text-5xl font-bold'>Votre plaisir</span>
+                        <span className='text-5xl font-black text-[#FF0800]'>commence</span>
+                        <span className='text-5xl font-bold'>par ici...</span>
                         <p className="text-white mt-2 text-2xl sm:relative left-2 top-10">Découvrez les meilleurs films du moment</p>                        
                     </div>
                 </div>
