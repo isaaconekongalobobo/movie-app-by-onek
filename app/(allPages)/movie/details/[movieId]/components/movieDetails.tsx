@@ -24,17 +24,12 @@ const MovieDetails = ({ movie }: MovieDetailsType) => {
                 </span>
               ))}
             </div>
-            <span>
-              Budget :{" "}
-              {movie.budget === 0
-                ? "Aucun détail sur le budget"
-                : movie.budget.toLocaleString() + " $"}
-            </span>
+            <span> Budget : {movie.budget === 0 ? "Aucun détail sur le budget" : movie.budget.toLocaleString() + " $"}</span>
           </div>
           <div className="flex flex-col gap-4">
             <div className='w-full flex justify-between sm:pr-5'>
                 <mark className="px-2">En bref :</mark>
-                <span className='bg-red-600 hover:bg-red-800 hover:text-white px-3 rounded-full py-0.5 cursor-pointer ' onClick={()=> showMoreOrLessOverView()} > { overviewHeigth ? "Voir moins" : "Voir plus" } </span>
+                <motion.span whileHover={{ scale: 1.1, y: -5 }} className='bg-red-600 hover:bg-red-800 hover:text-white px-3 rounded-full py-0.5 cursor-pointer ' onClick={()=> showMoreOrLessOverView()} > { overviewHeigth ? "Voir moins" : "Voir plus" } </motion.span>
             </div>
           <AnimatePresence mode="wait">
             <motion.p
