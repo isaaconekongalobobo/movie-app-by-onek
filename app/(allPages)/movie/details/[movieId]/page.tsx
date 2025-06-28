@@ -48,7 +48,7 @@ const Page = () => {
                         Regarder
                     </motion.button>
                 </motion.div>
-                <MovieDetails movie={movie} />
+                <MovieDetails movie={movie} loading={loading} />
             </div>
         </main>
     );

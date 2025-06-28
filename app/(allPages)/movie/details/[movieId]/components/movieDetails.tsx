@@ -3,14 +3,16 @@ import { truncateByWords } from '@/utils/StringUtils';
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import MovieSegonddetails from './movieSegonddetails';
+import LoadingSpinner from '@/app/components/loadingSpinner';
 interface MovieDetailsType {
-    movie: Movie | null
+    movie: Movie | null,
+    loading: boolean
 }
-const MovieDetails = ({ movie }: MovieDetailsType) => {
+const MovieDetails = ({ movie, loading }: MovieDetailsType) => {
     const [ overviewHeigth, setOverViewHeigth ] = useState(false)
     const showMoreOrLessOverView = () => setOverViewHeigth(!overviewHeigth)
     
-    if (!movie) return <p>Chargement...</p>;
+    if (!movie) return <div className='flex items-center w-full justify-center'><LoadingSpinner/></div>;
     return (
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0, transition: { delay: 1}}} className="sm:w-3/4">
         <div className="flex flex-col gap-2">
