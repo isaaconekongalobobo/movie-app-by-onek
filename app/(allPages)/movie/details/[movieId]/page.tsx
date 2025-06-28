@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import MovieDetails from './components/movieDetails';
 import { motion } from 'framer-motion';
 import MovieActors from './components/movieActors';
+import MovieTrailler from './components/movieTrailler';
 const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 const movieImageVariant = {
@@ -44,13 +45,14 @@ const Page = () => {
                     <h1 className="text-6xl font-medium hover:underline hover:underline-offset-8 top-16">
                         {movie?.title}
                     </h1>
-                    <motion.button whileHover={{ scale: 1.1 }} className="bg-black hover:bg-[#FF0800] hover:text-black hover:font-medium px-5 rounded-full py-2 sm:w-60 text-xl">
-                        Regarder
+                    <motion.button whileHover={{ scale: 1.1 }} className="bg-black hover:bg-[#FF0800] hover:text-black hover:font-medium px-2 sm:px-5 rounded-full py-2 sm:w-80 sm:text-xl">
+                        Regarder la bande d'annonce
                     </motion.button>
                 </motion.div>
                 <MovieDetails movie={movie} loading={loading} />
             </div>
             <MovieActors/>
+            <MovieTrailler/>
         </main>
     );
 }
