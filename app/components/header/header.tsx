@@ -10,7 +10,7 @@ const ongletList: OngletType[] = [
     { href: "/home", text: "Accueil" },
     { href: "/films", text: "Films" },
     { href: "/series", text: "Series" },
-    { href: "/playist", text: "Ma playlist" },
+    { href: "/actors", text: "Acteurs" },
 ]
 const Header = () => {
     const user = useUser()

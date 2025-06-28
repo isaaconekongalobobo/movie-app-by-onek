@@ -50,10 +50,26 @@ export interface SpokenLanguage {
   name: string;
 }
 
-// Facultatif si tu veux gérer "belongs_to_collection"
 export interface Collection {
   id: number;
   name: string;
   poster_path: string;
   backdrop_path: string;
 }
+
+// Pour les acteurs d'un film
+export interface Actor {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
