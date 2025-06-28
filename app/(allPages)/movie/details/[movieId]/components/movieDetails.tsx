@@ -47,7 +47,7 @@ const MovieDetails = ({ movie, loading }: MovieDetailsType) => {
           </AnimatePresence>
           </div>
           <AnimatePresence>
-            { !overviewHeigth && <MovieSegonddetails backdropPath={movie.backdrop_path} /> }
+            { !overviewHeigth && <MovieSegonddetails producers={movie.production_companies} backdropPath={movie.backdrop_path} /> }
           </AnimatePresence>
         </div>
       </motion.div>

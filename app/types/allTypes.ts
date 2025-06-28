@@ -33,7 +33,7 @@ export interface Genre {
 }
 
 export interface ProductionCompany {
-  id: number;
+  id?: number;
   logo_path: string | null;
   name: string;
   origin_country: string;
@@ -57,14 +57,3 @@ export interface Collection {
   poster_path: string;
   backdrop_path: string;
 }
-
-
-/* export interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  release_date: string;
-  vote_average: number;
-  backdrop_path: string;
-  poster_path: string;
-} */
