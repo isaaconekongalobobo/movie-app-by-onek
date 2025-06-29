@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Onglet, { OngletType } from './onglet';
-import { Key } from 'lucide-react';
 import { useUser } from '@clerk/nextjs';
+import { motion, AnimatePresence } from 'framer-motion';
 import UserProfileContainer from '../userProfile/userProfileContainer';
+import { redirect } from 'next/navigation'
 
 const ongletList: OngletType[] = [
     { href: "/home", text: "Accueil" },
@@ -13,13 +14,25 @@ const ongletList: OngletType[] = [
     { href: "/actors", text: "Acteurs" },
 ]
 const Header = () => {
-    const user = useUser()
-    const userConnected = useUser().user
-    const imageProfile = userConnected?.imageUrl ? userConnected?.imageUrl : '/images/userConnectedIcon.png'
+    const googleUser = useUser()
+    const imageProfile = useUser().user?.imageUrl ? useUser().user?.imageUrl : '/images/userConnectedIcon.png'
     const [ showProfileContainer, setShowProfileContainer ] = useState(false)
+    const [userConnected, setUserConnected] = useState<any>(null);
+
+    // Récuperation de l'utilisateur connecté via la méthode classique
+    useEffect(() => {
+        const userStr = sessionStorage.getItem("user");
+        if (userStr) {
+            setUserConnected(JSON.parse(userStr));
+        }
+    }, []);
+
+    if (!userConnected && !googleUser.user) {
+        return null
+    }
 
     return (
-        <header className={`bg-[#010B13] flex justify-between px-8 sm:px-8 py-5 items-center ${user.isSignedIn == false && 'hidden'}`} >
+        <header className={`bg-[#010B13] flex justify-between px-8 sm:px-8 py-5 items-center`} >
             <h1 className=' text-xl sm:text-xl font-semibold text-[#FF0800] '>Movie App <mark className='bg-white text-[#FF0800] sm:px-4 px-1 py-1 font-bold sm:text-2xl rounded '>by Onek</mark></h1>
             <nav className=" hidden sm:flex flex-row justify-center gap-16 w-2/4  ">
                 {
@@ -30,7 +43,9 @@ const Header = () => {
                 <div className="bg-center bg-cover size-8 sm:size-10 rounded-full" style={{ backgroundImage: `url(${imageProfile})` }}/>
                 <span> {userConnected?.fullName} </span>
             </div>
-            { showProfileContainer && user.isSignedIn  && <UserProfileContainer showContainer={showProfileContainer} setShowContainer={setShowProfileContainer}/>  }
+            <AnimatePresence>
+                { showProfileContainer && userConnected  && <UserProfileContainer showContainer={showProfileContainer} setShowContainer={setShowProfileContainer}/>  }
+            </AnimatePresence>
         </header>
 
     );

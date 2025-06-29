@@ -25,6 +25,7 @@ const containerVariant = {
 const UserProfileContainer = ({showContainer, setShowContainer} : userProfileContainerType) => {
     const userConnected = useUser().user
     const { signOut } = useAuth()
+
     const SignOut = async () => {
         setShowContainer(false)
         await signOut().then(() => {
@@ -34,7 +35,7 @@ const UserProfileContainer = ({showContainer, setShowContainer} : userProfileCon
         })
     }
     return (
-        <motion.div variants={containerVariant} initial="initial" animate="animate"  className=' w-60 p-4 bg-white absolute top-24 right-6 text-black rounded border-2 hover:border-[#FF0800] flex flex-col items-center justify-center gap-4 '>
+        <motion.div variants={containerVariant} initial="initial" animate="animate" exit={{ y: -10, opacity: 0 }}  className=' w-60 p-4 bg-white absolute top-24 right-6 text-black rounded border-2 hover:border-[#FF0800] flex flex-col items-center justify-center gap-4 z-20 '>
             <header className='flex items-center justify-between sm:gap-24 '>
                 <h1>Votre profile</h1>
                 <MdOutlineCloseFullscreen onClick={() => setShowContainer (false)}  />

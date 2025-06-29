@@ -17,7 +17,7 @@ const MovieTrailler = () => {
             );
 
             if (trailers.length > 0) {
-            setTrailerUrl(`https://www.youtube.com/watch?v=${trailers[0].key}`);
+                setTrailerUrl(`https://www.youtube.com/watch?v=${trailers[0].key}`);
             }
         });
     }, [movieId]);
