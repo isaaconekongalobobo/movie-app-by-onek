@@ -1,34 +1,5 @@
 "use client"
 
-export const metadata = {
-  title: "Accueil | The Movie App",
-  description: "Découvrez les meilleurs films du moment...",
-  openGraph: {
-    title: "The Movie App by Onek",
-    description: "L'application ultime pour les fans de cinéma.",
-    url: "https://movie-app-by-onek-ws.onrender.com",
-    siteName: "The Movie App by Onek",
-    images: [
-      {
-        url: "https://res.cloudinary.com/do2qnb4zc/image/upload/v1751194581/theMovieApp_lk2iyw.png",
-        width: 1200,
-        height: 630,
-        alt: "Aperçu de l'application The Movie App",
-      },
-    ],
-    locale: "fr_FR",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "The Movie App by Onek",
-    description: "Suivez vos films et séries préférés",
-    images: ["https://res.cloudinary.com/do2qnb4zc/image/upload/v1751194581/theMovieApp_lk2iyw.png"],
-    creator: "@Isaaconek",
-  },
-};
-
-
 import MovieCard from '@/app/components/movieCard';
 import { Movie } from '@/app/types/allTypes';
 import axios from 'axios';
