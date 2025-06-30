@@ -15,6 +15,7 @@ import axios from "axios"
 import { SmallLoadingSpinner } from "./smallLoadingSpinner"
 import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from 'next/navigation';
+import { useUserConnected } from "../store/userConnected"
 
 interface formType {
   email: string,
@@ -24,21 +25,15 @@ interface formType {
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [ loading, setLoading ] = useState(false)
   const [ error, setError ] = useState({ error: false, message: "" })
-  const [userConnected, setUserConnected] = useState<any>(null);
+  const { userConnected, setUserConnected } = useUserConnected( )
   const router = useRouter();
 
-  // Récuperation de l'utilisateur connecté via la méthode classique
   useEffect(() => {
-    const userStr = sessionStorage.getItem("user");
-    if (userStr) {
-      setUserConnected(JSON.parse(userStr));
+    if (userConnected !== null) {
+      router.push('/home');
     }
-  }, []);
+  }, [userConnected]);
 
-  const { isSignedIn } = useUser()
-  if (isSignedIn || userConnected) {
-    redirect('/home')
-  }
 
   const { handleSubmit, register } = useForm<formType>()
   const OnFormSubmit = async (data: formType) => {
@@ -46,11 +41,11 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
     axios.post ("/api/login", data)
     .then((response) => {
       setError({ error: false, message: "" })
-      if (response.data.success) {
-        sessionStorage.setItem("user", JSON.stringify(response.data.user));
-      }
+      setUserConnected(response.data.user)
       router.push('/home');
     }).catch((error) => {
+      console.log("\n \n ICI, ERREUR lors de l'authentification")
+      console.error(error)
       setError({ error: true, message: "Email ou mot de passe incorrecte" })
     })
     .finally(() => setLoading(false))

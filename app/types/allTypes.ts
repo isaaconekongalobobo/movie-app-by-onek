@@ -84,6 +84,6 @@ export interface User {
 }
 
 export interface UserConnectedStore {
-  user: User | null
+  userConnected: User | null
   setUserConnected: (autheticatedUser: User) => void
 }

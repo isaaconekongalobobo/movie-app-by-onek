@@ -6,6 +6,7 @@ import { useUser } from '@clerk/nextjs';
 import { motion, AnimatePresence } from 'framer-motion';
 import UserProfileContainer from '../userProfile/userProfileContainer';
 import { redirect } from 'next/navigation'
+import { useUserConnected } from '@/app/store/userConnected';
 
 const ongletList: OngletType[] = [
     { href: "/home", text: "Accueil" },
@@ -17,17 +18,9 @@ const Header = () => {
     const googleUser = useUser()
     const imageProfile = useUser().user?.imageUrl ? useUser().user?.imageUrl : '/images/userConnectedIcon.png'
     const [ showProfileContainer, setShowProfileContainer ] = useState(false)
-    const [userConnected, setUserConnected] = useState<any>(null);
+    const { userConnected, setUserConnected } = useUserConnected()
 
-    // Récuperation de l'utilisateur connecté via la méthode classique
-    useEffect(() => {
-        const userStr = sessionStorage.getItem("user");
-        if (userStr) {
-            setUserConnected(JSON.parse(userStr));
-        }
-    }, []);
-
-    if (!userConnected && !googleUser.user) {
+    if (!userConnected) {
         return null
     }
 
@@ -41,7 +34,7 @@ const Header = () => {
             </nav>  
             <div className='hidden sm:flex flex-row justify-center gap-2 items-center cursor-pointer' title='Votre profile' onClick={() => setShowProfileContainer (true)}>
                 <div className="bg-center bg-cover size-8 sm:size-10 rounded-full" style={{ backgroundImage: `url(${imageProfile})` }}/>
-                <span> {userConnected?.fullName} </span>
+                <span> {` ${userConnected.firstName} ${userConnected.lastName} `} </span>
             </div>
             <AnimatePresence>
                 { showProfileContainer && userConnected  && <UserProfileContainer showContainer={showProfileContainer} setShowContainer={setShowProfileContainer}/>  }
