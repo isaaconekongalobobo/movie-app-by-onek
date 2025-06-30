@@ -23,9 +23,11 @@ interface formType {
 }
 
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
+  const { isSignedIn, user } = useUser()
   const [ loading, setLoading ] = useState(false)
   const [ error, setError ] = useState({ error: false, message: "" })
-  const { userConnected, setUserConnected } = useUserConnected( )
+  const userConnected = useUserConnected((state) => state.userConnected);
+  const setUserConnected = useUserConnected((state) => state.setUserConnected);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,6 +35,20 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
       router.push('/home');
     }
   }, [userConnected]);
+
+  useEffect(() => {
+    if (isSignedIn && user && !userConnected) {
+      const mappedUser = {
+        id: user.id,
+        fullName: user.fullName,
+        email: user.primaryEmailAddress?.emailAddress || '',
+        profilImage: user.imageUrl
+      }
+      
+      setUserConnected(mappedUser)
+      router.push("/home")
+    }
+  }, [isSignedIn, user])
 
 
   const { handleSubmit, register } = useForm<formType>()
@@ -50,15 +66,17 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
     })
     .finally(() => setLoading(false))
   }
-  
+
+  if (userConnected !== null) {
+    return null;
+  }
+ 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Connectez vous pour continuer</CardTitle>
-          <CardDescription>
-            Utiliser mon compte Google
-          </CardDescription>
+          <CardDescription>Utiliser mon compte Google</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(OnFormSubmit)}>

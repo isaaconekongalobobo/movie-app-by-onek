@@ -74,16 +74,17 @@ export interface Actor {
 }
 
 export interface User {
-  id?: number
-  firstName: string
-  lastName: string
+  id?: number | string
+  firstName?: string
+  lastName?: string
+  fullName?: string | null
   profilImage: string
   email: string
-  password: string
-  created: string
+  password?: string
+  created?: string
 }
 
 export interface UserConnectedStore {
   userConnected: User | null
-  setUserConnected: (autheticatedUser: User) => void
+  setUserConnected: (autheticatedUser: User | null) => void
 }
