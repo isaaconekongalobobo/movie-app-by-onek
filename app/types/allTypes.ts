@@ -73,3 +73,17 @@ export interface Actor {
   order: number;
 }
 
+export interface User {
+  id?: number
+  firstName: string
+  lastName: string
+  profilImage: string
+  email: string
+  password: string
+  created: string
+}
+
+export interface UserConnectedStore {
+  user: User | null
+  setUserConnected: (autheticatedUser: User) => void
+}
