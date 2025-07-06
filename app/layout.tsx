@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider, useUser } from "@clerk/nextjs";
 import Header from "./components/header/header";
+import MobileTabs from "./components/header/mobileTabs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +60,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <html lang="fr">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#010B1399]  text-white`}>
           <Header/>
+          <nav className="flex justify-center">
+            <MobileTabs/>
+          </nav>
+          
           {children}
         </body>
       </html>      
