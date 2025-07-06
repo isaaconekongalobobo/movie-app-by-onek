@@ -25,8 +25,8 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#010B13] flex justify-between px-8 sm:px-8 py-5 items-center">
-      <h1 className="text-xl sm:text-xl font-semibold text-[#FF0800]">
+    <header className="bg-[#010B13] flex justify-between px-4 sm:px-8 py-5 items-center fixed w-full h-16 sm:h-auto z-30 ">
+      <h1 className="sm:text-xl font-semibold text-[#FF0800]">
         Movie App <mark className="bg-white text-[#FF0800] sm:px-4 px-1 py-1 font-bold sm:text-2xl rounded">by Onek</mark>
       </h1>
       <nav className="hidden sm:flex flex-row justify-center gap-16 w-2/4">
@@ -35,12 +35,12 @@ const Header = () => {
         ))}
       </nav>
       <div
-        className="hidden sm:flex flex-row justify-center gap-2 items-center cursor-pointer"
+        className="flex flex-row justify-center gap-2 items-center cursor-pointer"
         title="Votre profile"
         onClick={() => setShowProfileContainer(true)}
       >
         <div className="bg-center bg-cover size-8 sm:size-10 rounded-full" style={{ backgroundImage: `url(${imageProfile})` }} />
-        <span>{userConnected.fullName || `${userConnected.firstName} ${userConnected.lastName}`}</span>
+        <span className='hidden sm:block'>{userConnected.fullName || `${userConnected.firstName} ${userConnected.lastName}`}</span>
       </div>
       <AnimatePresence>
         {showProfileContainer && userConnected && (
