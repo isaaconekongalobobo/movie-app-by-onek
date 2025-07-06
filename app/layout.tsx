@@ -63,7 +63,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <nav className="flex justify-center">
             <MobileTabs/>
           </nav>
-          
           {children}
         </body>
       </html>      

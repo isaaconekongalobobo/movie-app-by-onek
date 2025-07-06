@@ -26,7 +26,7 @@ const Page = () => {
         }).finally(() => setLoading (false))
     }, []);
     return (
-        <main>
+        <main className='sm:pt-20'>
             <div style={{ backgroundImage: `url('/images/avatar-cover.jpg')` }} className='bg-center sm:bg-left bg-no-repeat w-[100%] h-screen sm:px-8 sm:py-10'>
                 <div className='bg-black h-screen opacity-20 rounded-2xl '/>
                 <div className="relative p-6 top-[-60%] z-10 ">

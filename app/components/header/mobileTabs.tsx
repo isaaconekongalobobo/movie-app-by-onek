@@ -5,14 +5,6 @@ import { IoFilmSharp } from "react-icons/io5";
 import { RiMovie2Fill } from "react-icons/ri";
 import { FaPersonRays } from "react-icons/fa6";
 
-const tabList = [
-  { href: "/home", text: "Accueil" },
-  { href: "/films", text: "Films" },
-  { href: "/series", text: "Series" },
-  { href: "/actors", text: "Acteurs" },
-]
-
-
 const MobileTabs = () => {
     return (
         <div className='bg-red-900 h-14 w-[90%] fixed z-30 bottom-5 rounded-xl px-5 py-2 flex justify-between gap-5 sm:hidden '>
